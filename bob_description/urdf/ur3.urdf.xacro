@@ -1,0 +1,93 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://ros.org/wiki/xacro"
+  name="ur3" >
+
+
+  <!--<xacro:arg name="limited" default="false" />-->
+
+  <xacro:property name="table_prefix"             value="newport_vh3660_opt_" />
+  <xacro:property name="robot_mounting_prefix"    value="ur3_base_plate_" />
+  <xacro:property name="robot_prefix"             value="ur3_" />
+
+  <!-- world -->
+  <link name="world" />
+  <joint name="world_joint" type="fixed">
+    <parent link="world" />
+    <child link = "${table_prefix}base_link" />
+    <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0" />
+  </joint>
+
+
+   <!-- Labo furniture -->
+
+  <xacro:include filename="$(find bob_description)/urdf/component/lab_d8_3023.urdf.xacro" />
+  <xacro:lab_hut prefix="lab_" />
+  <xacro:lab_wall prefix="lab_" />
+  <xacro:lab_table prefix="lab_" />
+
+  <joint name="lab_hut_joint" type="fixed">
+    <parent link="world" />
+    <child link = "lab_hut" />
+    <origin xyz="0.8096 -0.6296 0.0" rpy="0.0 0.0 0.0" />
+  </joint>
+
+  <joint name="lab_wall_joint" type="fixed">
+    <parent link="world" />
+    <child link = "lab_wall" />
+    <origin xyz="${1.65/2} -0.6296 0.0" rpy="0.0 0.0 ${pi}" />
+  </joint>
+
+  <joint name="lab_table_joint" type="fixed">
+    <parent link="world" />
+    <child link = "lab_table" />
+    <origin xyz="-0.66760 -0.6296 0.0" rpy="0.0 0.0 ${pi/2}" />
+  </joint>
+
+
+
+
+  <!-- Used for planning scene -->
+  <!-- 180 deg rotation so that the x and y is more natural to the eye -->
+  <link name="optical_table" />
+  <joint name="optical_table_joint" type="fixed">
+    <parent link= "${table_prefix}top_link" />
+    <child link = "optical_table" />
+    <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 ${pi}" />
+  </joint>
+
+
+  <!-- table -->
+  <xacro:include filename="$(find bob_description)/urdf/component/newport_vh3660_opt.urdf.xacro" />
+  <xacro:newport_vh3660_opt prefix="${table_prefix}" />
+
+  <joint name="${robot_mounting_prefix}base_joint" type="fixed">
+    <parent link= "optical_table" />
+    <child link = "${robot_mounting_prefix}base_link" />
+    <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 ${pi}" />
+  </joint>
+
+  <!-- robot mounting -->
+  <xacro:include filename="$(find bob_description)/urdf/component/ur3_mounting_plate.urdf.xacro" />
+  <xacro:ur3_mounting_plate prefix="${robot_mounting_prefix}" />
+
+  <joint name="${robot_prefix}base_link_joint" type="fixed">
+    <parent link= "${robot_mounting_prefix}top_link" />
+    <child link = "${robot_prefix}base_link" />
+    <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0" />
+  </joint>
+
+  <!-- robot -->
+  <!--<xacro:include filename="$(find ur_description)/urdf/ur3_calibration_rep199.urdf.xacro" />-->
+  <xacro:arg name="limited" default="false"/>
+<xacro:arg name="kinematics_config" default="$(find ur_description)/config/ur3_default.yaml"/>
+  <xacro:include filename="$(find ur_description)/urdf/ur3.urdf.xacro" />
+  <xacro:ur3_robot 
+    prefix="${robot_prefix}" 
+    joint_limited="$(arg limited)" 
+    kinematics_file="${load_yaml('$(arg kinematics_config)')}"
+  />
+
+
+</robot>
+
+

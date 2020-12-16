@@ -1,0 +1,118 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" 
+  name="lab_d8_3023">
+
+
+  <xacro:property name="HUT_LENGTH" value="1.0" />
+  <xacro:property name="HUT_WIDTH"  value="1.0" />
+  <xacro:property name="HUT_HEIGHT" value="1.0" />
+
+  <xacro:property name="WALL_LENGTH" value="1.65" />
+  <xacro:property name="WALL_WIDTH"  value="0.15" />
+  <xacro:property name="WALL_HEIGHT" value="1.0" />
+
+  <xacro:property name="TABLE_LENGTH" value="1.5" />
+  <xacro:property name="TABLE_WIDTH"  value="0.15" />
+  <xacro:property name="TABLE_HEIGHT" value="1.0" />
+
+  <xacro:macro name="lab_hut" params="prefix">
+
+
+  <link name="${prefix}hut" >
+    <inertial>
+      <origin xyz="${HUT_LENGTH/2} ${HUT_WIDTH/2} ${HUT_HEIGHT/2}" rpy="0 0 0"/>
+      <mass value="1"/>
+      <inertia ixx="100"  ixy="0"  ixz="0" iyy="100" iyz="0" izz="100" />
+    </inertial>
+    <visual>
+      <origin xyz="${HUT_LENGTH/2} ${HUT_WIDTH/2} ${HUT_HEIGHT/2}" rpy="0 0 0"/>
+      <geometry>
+        <box size="${HUT_LENGTH} ${HUT_WIDTH} ${HUT_HEIGHT}"/>
+      </geometry>
+      <material name="Cyan">
+        <color rgba="0 1.0 1.0 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="${HUT_LENGTH/2} ${HUT_WIDTH/2} ${HUT_HEIGHT/2}" rpy="0 0 0"/>
+      <geometry>
+        <box size="${HUT_LENGTH} ${HUT_WIDTH} ${HUT_HEIGHT}"/>
+      </geometry>
+    </collision>
+  </link>
+
+
+
+
+  </xacro:macro>
+
+
+  <xacro:macro name="lab_wall" params="prefix">
+
+
+  <link name="${prefix}wall" >
+    <inertial>
+      <origin xyz="${WALL_LENGTH/2} ${WALL_WIDTH/2} ${WALL_HEIGHT/2}" rpy="0 0 0"/>
+      <mass value="1"/>
+      <inertia ixx="100"  ixy="0"  ixz="0" iyy="100" iyz="0" izz="100" />
+    </inertial>
+    <visual>
+      <origin xyz="${WALL_LENGTH/2} ${WALL_WIDTH/2} ${WALL_HEIGHT/2}" rpy="0 0 0"/>
+      <geometry>
+        <box size="${WALL_LENGTH} ${WALL_WIDTH} ${WALL_HEIGHT}"/>
+      </geometry>
+      <material name="Cyan">
+        <color rgba="0 1.0 1.0 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="${WALL_LENGTH/2} ${WALL_WIDTH/2} ${WALL_HEIGHT/2}" rpy="0 0 0"/>
+      <geometry>
+        <box size="${WALL_LENGTH} ${WALL_WIDTH} ${WALL_HEIGHT}"/>
+      </geometry>
+    </collision>
+  </link>
+
+  </xacro:macro>
+
+
+
+  <xacro:macro name="lab_table" params="prefix">
+
+
+  <link name="${prefix}table" >
+     <inertial>
+      <origin xyz="${TABLE_LENGTH/2} ${TABLE_WIDTH/2} ${TABLE_HEIGHT/2}" rpy="0 0 0"/>
+      <mass value="1"/>
+      <inertia ixx="100"  ixy="0"  ixz="0" iyy="100" iyz="0" izz="100" />
+    </inertial>
+    <visual>
+      <origin xyz="${TABLE_LENGTH/2} ${TABLE_WIDTH/2} ${TABLE_HEIGHT/2}" rpy="0 0 0"/>
+      <geometry>
+        <box size="${TABLE_LENGTH} ${TABLE_WIDTH} ${TABLE_HEIGHT}"/>
+      </geometry>
+      <material name="Cyan">
+        <color rgba="0 1.0 1.0 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="${TABLE_LENGTH/2} ${TABLE_WIDTH/2} ${TABLE_HEIGHT/2}" rpy="0 0 0"/>
+      <geometry>
+        <box size="${TABLE_LENGTH} ${TABLE_WIDTH} ${TABLE_HEIGHT}"/>
+      </geometry>
+    </collision>
+  </link>
+
+  </xacro:macro>
+
+
+
+
+
+
+
+
+
+
+
+</robot>

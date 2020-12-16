@@ -1,0 +1,11 @@
+moveit_setup_assistant_config:
+  URDF:
+    package: bob_description
+    relative_path: urdf/ur3_dual_eef.urdf.xacro
+    xacro_args: ""
+  SRDF:
+    relative_path: config/ur3_dual_eef.srdf
+  CONFIG:
+    author_name: cpt-yoshi
+    author_email: cpt.yoshisaur@gmail.com
+    generated_timestamp: 1582747785

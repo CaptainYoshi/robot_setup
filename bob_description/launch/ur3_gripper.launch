@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<launch>
+  <arg name="limited" default="false" doc="If true, limits joint range [-PI, PI] on all joints." />
+
+  <arg name="model" default="$(find bob_description)/urdf/ur3_gripper.urdf.xacro" />
+  <param name="robot_description" command="$(find xacro)/xacro $(arg model) limited:=$(arg limited)" />
+</launch>

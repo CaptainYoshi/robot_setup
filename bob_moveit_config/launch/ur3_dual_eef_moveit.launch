@@ -1,0 +1,18 @@
+<?xml version="1.0" ?>
+<launch>
+  
+  <arg name="pipeline" default="ompl" />
+
+
+  <include file="$(find bob_moveit_config)/launch/move_group.launch">
+    <arg name="pipeline" value="$(arg pipeline)"/>
+   <arg name="robot_name" value="ur3_dual_eef"/>
+  </include>
+
+
+ <!-- Alternative is to set have robotiq_2f_140/joint_states to /joint_states it will merge correctly-->
+  <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher">
+    <rosparam param="source_list">[robotiq_2f_140/joint_states, joint_states]</rosparam>
+  </node>
+
+</launch>

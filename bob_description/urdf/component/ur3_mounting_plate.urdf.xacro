@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<robot
+  xmlns:xacro="http://www.ros.org/wiki/xacro"
+  name="ur3_mounting_plate">
+  
+<xacro:macro name="ur3_mounting_plate" params="prefix">
+
+
+  <link name="${prefix}base_link">
+    <inertial>
+      <origin xyz="1.0006E-17 6.84182944895511E-19 0.0064934" rpy="0 0 0" />
+      <mass value="0.79377" />
+      <inertia
+        ixx="0.00152528665906181"
+        ixy="2.69123212294128E-19"
+        ixz="-8.56493608321678E-22"
+        iyy="0.00152528665906181"
+        iyz="1.03720805033979E-19"
+        izz="0.00302801058751195" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://bob_description/meshes/udes/visual/ur3_mounting_plate.dae"/>
+      </geometry>
+      <material name="">
+        <color rgba="0.89804 0.91765 0.92941 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="${pi/2} 0 0" />
+      <geometry>
+        <mesh filename="package://bob_description/meshes/udes/collision/ur3_mounting_plate.stl"/>
+      </geometry>
+    </collision>
+  </link>
+
+
+  <link name="${prefix}top_link" />
+  <joint name="${prefix}top_joint" type="fixed">
+    <origin xyz="0 0 0.01309" rpy="0 0 0" />
+    <parent link="${prefix}base_link" />
+    <child link="${prefix}top_link" />
+  </joint>
+
+
+
+
+</xacro:macro>
+</robot>
